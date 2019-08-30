@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="iver.mapper.BoardMapper">
+	<select id="selectBoardList" resultType="iver.dto.BoardDto">
+		select * from t_board
+	</select>
+	
+	<!-- row수와 currentPage로 paging -->
+	<select id="selectTestList" parameterType="hashmap" resultType="iver.dto.TableDto">
+		select * from employees order by emp_no Limit #{first}, #{last}
+	</select>
+	
+	<!-- 전체 row 수  -->
+	<select id="selectTotalPageCnt" resultType="int">
+		SELECT COUNT(*) FROM employees;
+	</select>
+	
+</mapper>
