@@ -36,6 +36,20 @@ public class BoardController {
 		return mv;
 	}
 	
+	
+	//처음 로딩 index.html
+	@RequestMapping("main")
+	public String firstLoading() throws Exception{
+		return "index";
+	}
+	
+	@RequestMapping("getPagingTableHtml")
+	@ResponseBody
+	public String getTestTable() throws Exception{
+		//ModelAndView mv = new ModelAndView("board/pagingTable");
+		return "board/pagingTable";
+	}
+	
 	//처음 로딩
 	@RequestMapping("board/testTable")
 	public ModelAndView testTable() throws Exception{
