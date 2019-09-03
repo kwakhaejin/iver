@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="/iverv/common/js/promise_test.js"></script>
+<!-- <script type="text/javascript" src="/js/employees.js"></script>
+<link rel="stylesheet" th:href="@{/css/style.css}"></link> -->
+<link rel="stylesheet" href="/iverv/main/css/menu.css" />
+<title>IVER</title>
+<script>
+	$(document).ready(function() {
+		var staticUrl = window.location.protocol + ":" +window.location.host;
+		console.log("?");
+		$.ajax({
+			url:"/iverv/boardPaging/pagingTable.html",
+			success:function(data){
+				//alert("!!");
+			},
+			error:function(error){
+				console.log(error.statusText);
+			}
+		});
+		
+		getTest();
+	});
+</script>
+</head>
+<body>
+	<div id="wrapper">
+		<nav>
+			<ul class="menu">
+				<li class="home current"><a href="#"><span>Home</span></a></li>
+				<li><a href="#"><span>About</span></a></li>
+				<li><a href="#"><span>Service</span></a>
+					<ul class="sub-menu">
+						<li><a href="#">Sub-menu 1</a></li>
+						<li><a href="#">Sub-menu 2</a></li>
+						<li><a href="#">Sub-menu 3</a></li>
+					</ul></li>
+				<li><a href="#"><span>Application Form</span></a></li>
+				<li><a href="#"><span>Blog</span></a></li>
+				<li><a href="#"><span>Contacts</span></a></li>
+			</ul>
+		</nav>
+	</div>
+	<div id="testList">
+		<h1>hi</h1>
+	</div>
+</body>
+</html>
