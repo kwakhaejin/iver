@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="iver.mapper.MenuMapper">
+	
+	<resultMap type="iver.dto.MenuDto" id="menuResultMap">
+		<id property="menu_id" column="menu_id" />
+		<result property="parent_id" column="parent_id"  />
+		<result property="menu_name" column="menu_name"  />
+		<result property="url" column="url"  />
+		<collection property="sub_menus" column="{menu_id=menu_id, parent_id=menu_id}" ofType="iver.dto.MenuDto" select="getMenuList"/>
+	</resultMap>
+	<select id="getMenuList" resultMap="menuResultMap">
+		select menu_id , menu_name, parent_id , url
+		from menu
+		
+		where  parent_id
+		<choose>
+		<when test="parent_id == null or parent_id == 0">
+			is null
+		</when>
+		<otherwise> 
+			 = #{menu_id}
+		</otherwise>
+		</choose>
+		  and use_yn = 'Y'
+		  order by menu_order
+		  
+	</select>
+</mapper>
