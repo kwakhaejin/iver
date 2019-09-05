@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/iverv/boardPaging/css/style.css" />
+<!-- <script type="text/javascript" src="/iverv/boardPaging/js/employees.js"></script> -->
+</head>
+
+<body>
+	<div>
+		<table class="board_list">
+			<colgroup>
+				<col width="10%" />
+				<col width="15%" />
+				<col width="*" />
+				<col width="*" />
+				<col width="*" />
+				<col width="*" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">생년월일</th>
+					<th scope="col">first name</th>
+					<th scope="col">last name</th>
+					<th scope="col">gender</th>
+					<th scope="col">입사일</th>
+				</tr>
+			</thead>
+			<tbody id="getList">
+				<!-- <tr th:each="list : ${list}">
+					<td th:text="${list.empNo}"></td>
+					<td th:text="${list.birthDate}"></td>
+					<td th:text="${list.firstName}"></td>
+					<td th:text="${list.lastName}"></td>
+					<td th:text="${list.gender}"></td>
+					<td th:text="${list.hireDate}"></td>
+				</tr> -->
+			</tbody>
+		</table>
+		<div class="list_number">
+			<div>
+				<div class="list_n_menu cursorCss">
+					<!-- 블록내 지역변수 설정 -->
+					<!-- <div th:with="start=${startEnd.start},end=${startEnd.end}">
+						<div class="dropdown">
+							<button class="dropbtn cursorCss">30</button>
+							<div class="dropdown-content">
+								<a>10</a> <a>20</a> <a>30</a>
+							</div>
+						</div>
+						<a class="beforePage" style="display: none"> 이전 </a>
+
+						<div id="pagenationBlock" style="display: inline-block">
+							<th:block th:each="num: ${#numbers.sequence(start, end)}">
+
+								<a th:class="${num}" th:classappend="clickCurrentPage"
+									th:text="${num}" th:id="${num}"></a>
+
+							</th:block>
+						</div>
+						<div  id="nextPageId" style="display:inline-block">
+							<th:block th:if="${totalNum > end}">
+								<a class="nextPage"> 다음 </a>
+							</th:block>
+						</div>
+					</div> -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
