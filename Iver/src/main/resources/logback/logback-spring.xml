@@ -5,8 +5,9 @@
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
     
     <!-- 폴더 경로, 기본적인 파일명 설정 -->
-    <property name="PROJECT" value="logs/collection"/>
-    <property name="FILE_NAME" value="%d{yyyy-MM-dd}-${PROJECT}" />
+    <!-- <property name="PROJECT" value="logs/collection"/> -->
+    <property name="PROJECT" value="logs/console"/>
+    <property name="FILE_NAME" value="${PROJECT}-%d{yyyy-MM-dd}" />
 	<property name="LOG_LEVEL" value="${logging.level}" />
 	<property name="MAX_SIZE" value="1GB" />
 	<property name="MAX_HISTORY" value="3" /><!-- 기간설정 -->
@@ -22,6 +23,18 @@
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${PROJECT}.log</file>
 		<append>true</append>
+		
+		<!-- 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${FILE_NAME}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				or whenever the file size reaches 1GB
+				<maxFileSize>${MAX_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			keep 30 days' worth of history
+			<maxHistory>${MAX_HISTORY}</maxHistory>
+		</rollingPolicy> -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${FILE_NAME}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy
@@ -44,6 +57,16 @@
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>WARN</level>
 		</filter>
+		<!-- <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${FILE_NAME}.%i.error.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				or whenever the file size reaches 1GB
+				<maxFileSize>${MAX_SIZE}</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			keep 30 days' worth of history
+			<maxHistory>${MAX_HISTORY}</maxHistory>
+		</rollingPolicy> -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${FILE_NAME}.%i.error.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy
