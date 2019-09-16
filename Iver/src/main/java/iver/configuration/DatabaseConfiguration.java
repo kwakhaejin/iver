@@ -6,12 +6,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties") //PropertySource 어노테이션을 추가해서 다른 설정파일도 사용할 수 있다. classpath는 resource 폴더를 의미
+@EnableTransactionManagement //스프링에서 제공하는 어노테이션 기반 트랜잭션
 public class DatabaseConfiguration {
 
 	@Bean
@@ -25,5 +29,10 @@ public class DatabaseConfiguration {
 		DataSource dataSource = new HikariDataSource(hikariConfig());
 		System.out.println(dataSource.toString());
 		return dataSource;
+	}
+	
+	@Bean //스프링이 제공하는 트랜잭션 매니저를 등록
+	public PlatformTransactionManager transactionManager() throws Exception {
+		return new DataSourceTransactionManager(dataSource());  
 	}
 }
