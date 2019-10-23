@@ -11,9 +11,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 
 @Configuration
-@PropertySource("classpath:/application.properties")
+@PropertySources({
+	@PropertySource(value = "classpath:/application.properties"),
+	@PropertySource(value = "classpath:/banner.properties")
+})
 public class DatabaseMybatis {
 	
 	@Autowired
