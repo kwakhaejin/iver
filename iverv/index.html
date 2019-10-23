@@ -2,24 +2,156 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="/iverv/common/lib/jquery-3.1.0.js"></script>
+<script src="/iverv/common/js/jquery.xjax.js"></script>
+
 <script src="/iverv/common/js/promise_test.js"></script>
 <link rel="stylesheet" href="/iverv/main/css/menu.css" />
 <title>IVER</title>
 <script>
 	$(document).ready(function() {
-		$.ajax({
+		var apiUrl = window.location.protocol + '//127.0.0.1:8080'+'/iver';
+		var params = 'page=1&rows=10';
+		var xjax1 = function(){
+			$.xjax.get(apiUrl+"/test/getTestList"+"?"+params,{
+	 			success:function(data1){
+					xjax1.data1 = data1;
+					console.log("datas1"+data1);
+			 	}
+			 });	
+			 return this;
+		}
+
+		var xjax2  = function(){
+			$.xjax.get(apiUrl+"/test/getTestList"+"?"+'page=1&rows=20',{
+	 			success:function(data){
+					 console.log(xjax1.data1,"xjax2에서 가져온 data1");
+					 console.log(xjax3.data, "xjax3에서 가져온 data3")
+					 console.log("datas2"+data);
+				 }
+			 })
+			 
+		 	return this; 
+		}
+
+		// var xjax2 = {ajax2 : (function(){
+		// 	$.xjax.get(apiUrl+"/test/getTestList"+"?"+'page=1&rows=10',{
+	 	// 		success:function(data){
+		// 			 console.log("datas2"+data);
+		// 		 }
+		// })	
+		// })
+		// }
+
+		var xjax3 = function(){
+			$.xjax.get(apiUrl+"/test/getTestList"+"?"+'page=1&rows=30',{
+	 			success:function(data){
+					 xjax3.data = data;
+					 console.log("datas3"+data);
+			 	}
+		 	});	
+		}
+		
+		$.setChain.list = [xjax1, xjax2, xjax3];
+		$.setChain.chains($.setChain.list);
+
+
+		//xjax1();
+
+		//비동기가 차례대로 실행되지 않음
+		/* $.when(xjax1(), xjax2()).done(function(){
+			console.log("hi done");
+		}) */
+		
+		
+		
+	
+
+	/* var test = function(){
+		var testObj = {};
+
+		testObj.getFunc1 =  function(){
+			console.log("test1");
+		}
+		return testObj;
+	}
+
+	var testClone = new test();
+	console.log(">>",testClone);
+
+	var cloneFunc = testClone.getFunc1;
+	//cloneFunc();
+
+	$.when(cloneFunc()).done(function(){
+		console.log("finished!!!");
+	}); */
+
+
+
+
+	// console.log("????????");
+	// var pages = ["/boardPaging/pagingTagle.html", "/boardPaging/test1.html", "/boardPaging/test2.html"];
+	// var defer = new $.Deferred();
+	// var next = defer;
+
+	// for(var i=0; i<pages.length; i++){
+	// 	next = next.then(function(){
+	// 		console.log(next);
+	// 		return $.xjax.get(pages[i]).done(function(text){
+	// 			console.log("text  = ",text);
+	// 		});
+	// 	});
+	// }
+
+	// next.then(function(){
+	// 	console.log("모든페이지를 성공적으로 호출했을때 콜백을 구현");
+	// });
+		/* $.ajax({
 			url:"/iverv/boardPaging/pagingTable.html",
 			success:function(data){
 				$("#testList").html(data);
-				
 			},
 			error:function(error){
 				console.log(error.statusText);
 			}
 		});
+
 		
-		getTest();
+
+
+		
+		getTest(); */
+	
+		console.log("?");
+		// $.pros()
+		// .then(function (ok, fail, data){
+		// 	console.log("first");
+		// 	var params = "page=1&rows=30";
+		// 	$.xjax.get(apiUrl+"/test/getTestList"+"?"+params,{
+		// 		callback : function(data){
+		// 			console.log("list" +data);
+		// 			ok(data);
+		// 		},
+		// 		onError : function(res){
+		// 			alert("fail");
+		// 			fail(res);
+		// 		}
+		// 	});
+		// })
+		// .then(function(ok, fail, data){
+		// 	$.xjax.get(apiUrl+"/api/getMenuList",{
+		// 		success : function(data){ //ok
+		// 			console.log("menuList" +data);
+		// 			ok(data);
+		// 		},
+		// 		onError :function(res){
+		// 			fail(res);
+		// 		}
+		// 	})
+		// })
+		// .catch(function(res){
+		// 	alert(res.message);
+		// });
 	});
 </script>
 </head>
